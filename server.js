@@ -48,8 +48,8 @@ app.use(session({
   rolling: true,
   cookie: {
     httpOnly: true,
-    sameSite: 'none',
-    secure: true,
+    // sameSite: 'none',
+    // secure: true,
     maxAge: 86400000
   }
 })
