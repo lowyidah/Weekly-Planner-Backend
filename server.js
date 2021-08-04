@@ -39,6 +39,7 @@ const app = express();
 app.use(express.json());
 app.use(cors({
   origin : process.env.FRONTEND_URL, 
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true
 }));
 app.use(session({
@@ -48,6 +49,7 @@ app.use(session({
   rolling: true,
   cookie: {
     // httpOnly: true,
+    name: "session",
     sameSite: 'none',
     secure: true,
     maxAge: 86400000
