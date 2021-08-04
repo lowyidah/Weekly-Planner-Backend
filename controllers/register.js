@@ -36,7 +36,10 @@ const handleRegister = (req, res, db, bcrypt) => {
         .where('email', email)
     })
     .then((userDetails) => {
+        console.log("req.session.user1:", req.session)
+        console.log("req.session.user1:", req.session.user)
         req.session.user = userDetails[0];   
+        console.log("req.session.user2:", req.session.user)
         res.json(userDetails[0]);
     })
     .catch((err) => {
