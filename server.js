@@ -47,7 +47,6 @@ app.use(session({
   resave: false,
   rolling: true,
   cookie: {
-    sameSite: 'Lax',
     httpOnly: true,
     maxAge: 86400000
   }
