@@ -14,8 +14,6 @@ const db = require('knex')({
     }
   });
 
-  console.log("process.env: ", process.env);
-
 const additem = require('./controllers/additem.js');
 const loaditems = require('./controllers/loaditems.js');
 const deleteitem = require('./controllers/deleteitem.js');
@@ -54,6 +52,10 @@ app.use(session({
   }
 })
 );
+
+app.get('/', (req, res) => {
+  console.log("process.env: ", process.env);
+})
 
 app.post('/loaditems', (req, res) => loaditems.handleLoaditems(req, res, db));
 
