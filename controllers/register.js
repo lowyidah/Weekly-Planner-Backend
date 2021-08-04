@@ -39,8 +39,10 @@ const handleRegister = (req, res, db, bcrypt) => {
         req.session.user = userDetails[0];   
         res.json(userDetails[0]);
     })
-    .catch(() => res.status(400).json("Unable to register"))
-    .catch(() => {});
+    .catch((err) => {
+        console.log("Error:", err)
+        res.status(400).json("Unable to register")
+    })
 }
 
 module.exports = {
