@@ -40,7 +40,7 @@ const handleRegister = (req, res, db, bcrypt) => {
         res.json(userDetails[0]);
     })
     .catch((err) => {
-        console.log("Error:", err)
+        console.log("Error Registering:", err)
         res.status(400).json("Unable to register")
     })
 }
