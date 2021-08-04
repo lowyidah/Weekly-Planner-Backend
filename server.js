@@ -10,7 +10,7 @@ const db = require('knex')({
       // password : 'ZTM',
       // database : 'planner'
       connectionString: process.env.DATABASE_URL,
-      ssl: true
+      ssl: { rejectUnauthorized: false }
     }
   });
 
