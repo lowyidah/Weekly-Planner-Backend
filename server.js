@@ -91,4 +91,4 @@ app.post('/signincalendar', (req, res) => signincalendar.handleSignincalendar(re
 
 app.post('/savetogcal', (req, res) => savetogcal.handleSavetogcal(req, res));
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
