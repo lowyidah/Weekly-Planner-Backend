@@ -47,9 +47,9 @@ app.use(session({
   resave: false,
   rolling: true,
   cookie: {
-    httpOnly: true,
-    // sameSite: 'none',
-    // secure: true,
+    // httpOnly: true,
+    sameSite: 'none',
+    secure: true,
     maxAge: 86400000
   }
 })
