@@ -54,8 +54,8 @@ app.use(session({
 );
 
 app.get('/', (req, res) => {
-  console.log("process.env: ", process.env);
-  res.json('process.env: ' + process.env);
+  console.log("process.env.TEST: ", process.env.TEST);
+  res.json('process.env.TEST: ' + process.env.TEST);
 })
 
 app.post('/loaditems', (req, res) => loaditems.handleLoaditems(req, res, db));
