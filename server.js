@@ -39,8 +39,8 @@ const app = express();
 app.use(express.json());
 app.use(cors({
   origin : process.env.FRONTEND_URL, 
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  credentials: true
+  credentials: true,
+  'Access-Control-Allow-Origin': '*'
 }));
 app.use(session({
   secret: "secret",
