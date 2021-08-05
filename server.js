@@ -75,8 +75,7 @@ app.use(session({
 }));
 
 app.get('/', (req, res) => {
-  console.log("process.env.NODE_ENV: ", process.env.NODE_ENV);
-  res.json('process.env.NODE_ENV:: ' + process.env.NODE_ENV);
+  res.json('Success');
 })
 
 app.post('/loaditems', (req, res) => loaditems.handleLoaditems(req, res, db));
