@@ -49,6 +49,7 @@ app.use(session({
   cookie: {
     // httpOnly: true,
     domain: process.env.FRONTEND_URL,
+    keys: [process.env.COOKIE_KEY],
     name: "session",
     sameSite: 'none',
     secure: true,
