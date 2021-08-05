@@ -1,19 +1,40 @@
+let dbConnection, sessionCookie, corsOrigin, listenPort;
+if (process.env.NODE_ENV === 'production') {
+  dbConnection = {
+    connectionString: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false }
+  }
+  sessionCookie = {
+    name: "session",
+    sameSite: 'none',
+    secure: true,
+    maxAge: 86400000
+  }
+  corsOrigin = process.env.FRONTEND_URL;
+  listenPort = process.env.PORT;
+}
+else {
+  dbConnection = {
+    host : '127.0.0.1',
+    user : 'postgres',
+    password : 'ZTM',
+    database : 'planner'
+  }
+  sessionCookie = {
+    httpOnly: true,
+    maxAge: 86400000
+  }
+  corsOrigin = 'http://localhost:3001';
+  listenPort = 3000;
+}
+
 const express = require('express');
 const bcrypt = require('bcrypt')
 const session = require('express-session');
 const cors = require('cors');
-
-
 const db = require('knex')({
     client: 'pg',
-    connection: {
-      // host : '127.0.0.1',
-      // user : 'postgres',
-      // password : 'ZTM',
-      // database : 'planner'
-      connectionString: process.env.DATABASE_URL,
-      ssl: { rejectUnauthorized: false }
-    }
+    connection: dbConnection
   });
 
 const additem = require('./controllers/additem.js');
@@ -40,7 +61,7 @@ const savetogcal = require('./controllers/savetogcal.js');
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin : process.env.FRONTEND_URL, 
+  origin : corsOrigin, 
   credentials: true
 }));
 
@@ -50,15 +71,8 @@ app.use(session({
   saveUninitialized: false,
   resave: false,
   rolling: true,
-  cookie: {
-    // httpOnly: true,
-    name: "session",
-    sameSite: 'none',
-    secure: true,
-    maxAge: 86400000
-  }
-})
-);
+  cookie: sessionCookie
+}));
 
 app.get('/', (req, res) => {
   console.log("process.env.NODE_ENV: ", process.env.NODE_ENV);
@@ -105,4 +119,4 @@ app.post('/signincalendar', (req, res) => signincalendar.handleSignincalendar(re
 
 app.post('/savetogcal', (req, res) => savetogcal.handleSavetogcal(req, res));
 
-app.listen(process.env.PORT || 3000);
+app.listen(listenPort);
