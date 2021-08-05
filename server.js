@@ -2,6 +2,8 @@ const express = require('express');
 const bcrypt = require('bcrypt')
 const session = require('express-session');
 const cors = require('cors');
+
+
 const db = require('knex')({
     client: 'pg',
     connection: {
@@ -50,7 +52,6 @@ app.use(session({
   rolling: true,
   cookie: {
     // httpOnly: true,
-    // domain: process.env.FRONTEND_URL,
     name: "session",
     sameSite: 'none',
     secure: true,
@@ -60,8 +61,8 @@ app.use(session({
 );
 
 app.get('/', (req, res) => {
-  console.log("process.env.TEST: ", process.env.TEST);
-  res.json('process.env.TEST: ' + process.env.TEST);
+  console.log("process.env.NODE_ENV: ", process.env.NODE_ENV);
+  res.json('process.env.NODE_ENV:: ' + process.env.NODE_ENV);
 })
 
 app.post('/loaditems', (req, res) => loaditems.handleLoaditems(req, res, db));
