@@ -48,6 +48,7 @@ app.use(session({
   rolling: true,
   cookie: {
     // httpOnly: true,
+    domain: process.env.FRONTEND_URL,
     name: "session",
     sameSite: 'none',
     secure: true,
